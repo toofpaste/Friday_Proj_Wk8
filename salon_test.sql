@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 10, 2019 at 06:23 PM
+-- Generation Time: May 10, 2019 at 11:00 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.10
 
@@ -43,7 +43,11 @@ CREATE TABLE `items` (
   `id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
   `shiftDate` datetime NOT NULL,
-  `category_id` int(11) NOT NULL
+  `category_id` int(11) NOT NULL,
+  `endShift` datetime NOT NULL,
+  `cutInfo` varchar(255) NOT NULL,
+  `imgUrl` varchar(255) NOT NULL,
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -70,7 +74,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `items`

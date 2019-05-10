@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 10, 2019 at 06:22 PM
+-- Generation Time: May 10, 2019 at 10:59 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.10
 
@@ -38,7 +38,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
-(7, 'Mike');
+(11, 'Mike');
 
 -- --------------------------------------------------------
 
@@ -52,17 +52,18 @@ CREATE TABLE `items` (
   `shiftDate` datetime NOT NULL,
   `category_id` int(11) NOT NULL,
   `endShift` datetime NOT NULL,
-  `cutInfo` varchar(255) NOT NULL
+  `cutInfo` varchar(255) NOT NULL,
+  `imgUrl` varchar(255) NOT NULL,
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `description`, `shiftDate`, `category_id`, `endShift`, `cutInfo`) VALUES
-(8, 'MarinaJoe', '2019-05-15 15:00:00', 7, '2019-05-15 16:00:00', 'Extensions'),
-(9, 'Marc', '2019-05-22 11:03:00', 7, '2019-05-22 12:02:00', 'Bald'),
-(10, 'Matthew', '2019-05-21 01:00:00', 7, '2019-05-21 13:00:00', 'Dye');
+INSERT INTO `items` (`id`, `description`, `shiftDate`, `category_id`, `endShift`, `cutInfo`, `imgUrl`, `price`) VALUES
+(13, 'Joe', '2019-05-15 01:00:00', 11, '2019-05-15 01:01:00', 'Buzz', 'https://i.imgur.com/rsD0RUq.jpg', 50),
+(14, 'Shit bag', '2019-01-02 01:00:00', 11, '2019-01-01 14:00:00', 'bowl cut', 'https://i.imgur.com/WslaWDE.jpg', 5000);
 
 --
 -- Indexes for dumped tables
@@ -88,13 +89,13 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
