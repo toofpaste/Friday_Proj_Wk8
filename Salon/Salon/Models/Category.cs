@@ -114,7 +114,9 @@ namespace Salon.Models
                 string itemDescription = rdr.GetString(1);
                 DateTime dd = rdr.GetDateTime(2);
                 int itemCategoryId = rdr.GetInt32(3);
-                Item newItem = new Item(itemDescription, dd, itemCategoryId, itemId);
+                DateTime endShift = rdr.GetDateTime(4);
+                string cutInfo = rdr.GetString(5);
+                Item newItem = new Item(itemDescription, dd, itemCategoryId, endShift, cutInfo, itemId);
                 allCategoryItems.Add(newItem);
             }
             conn.Close();

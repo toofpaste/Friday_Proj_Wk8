@@ -12,15 +12,21 @@
     <input id="description" name="description" type="text">
     <button type="submit">Submit</button>
   </form> *@
-  <h1>Add a new item to @Model.GetName()</h1>
+  <h1>Add a new client for:  @Model.GetName()</h1>
 
   <form action='/categories/@Model.GetId()/items' method='post'>
     <input id='categoryId' name='categoryId' type='hidden' value='@Model.GetId()'>
-    <label for='itemDescription'>Stylist Info</label>
+    <label for='itemDescription'>Client Name</label>
     <input id='itemDescription' name='itemDescription' type='text'>
-    <label for="shiftDate">Shift Date</label>
+    <label for="shiftDate">Appointment Start: </label>
     <input id="shiftDate" name="shiftDate" type="datetime-local">
-    <button type='submit'>Add Info</button>
+	<br>
+	 <label for="endShift">Appointment End: </label>
+    <input id="endShift" name="endShift" type="datetime-local">
+	<label for='cutInfo'>Haircut Type</label>
+    <input id='cutInfo' name='cutInfo' type='text'>
+
+    <button type='submit'>Add Client</button>
   </form>
 
 </body>

@@ -4,10 +4,15 @@
 <h2>Edit Employee: @Model["category"].GetName()</h2>
 
 <form action="/categories/@Model["category"].GetId()/items/@Model["item"].GetId()" method="post">
-  <label for="newDescription">Information:</label>
+  <label for="newDescription">Client Name:</label>
   <input type="text" name="newDescription" value="@Model["item"].GetDescription()">
-  <label for="newShiftDate">Shift Date</label>
+  <label for="newShiftDate">Shift Start</label>
     <input id="newShiftDate" name="newShiftDate" type="datetime-local">
+	<br>
+	<label for="newEndShift">Shift End</label>
+    <input id="newEndShift" name="newEndShift" type="datetime-local">
+	 <label for="newCutInfo">Haircut Type:</label>
+	 <input type="text" name="newCutInfo" value="@Model["item"].GetDescription()">
   <button type="submit">Edit</button>
 </form>
 

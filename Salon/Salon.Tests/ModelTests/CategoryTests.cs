@@ -16,7 +16,7 @@ namespace Salon.Tests
         }
         public CategoryTest()
         {
-            DBConfiguration.ConnectionString = @"server=localhost;user id=root;password=root;port=8889;database=to_do_list_test;";
+            DBConfiguration.ConnectionString = @"server=localhost;user id=root;password=root;port=8889;database=salon_test;";
         }
         [TestMethod]
         public void CategoryConstructor_CreatesInstanceOfCategory_Category()
@@ -37,19 +37,6 @@ namespace Salon.Tests
             //Assert
             Assert.AreEqual(name, result);
         }
-        // [TestMethod]
-        // public void GetId_ReturnsCategoryId_Int()
-        // {
-        //   //Arrange
-        //   string name = "Test Category";
-        //   Category newCategory = new Category(name);
-        //
-        //   //Act
-        //   int result = newCategory.GetId();
-        //
-        //   //Assert
-        //   Assert.AreEqual(1, result);
-        // }
         public void GetAll_ReturnsAllCategoryObjects_CategoryList()
         {
             //Arrange
@@ -67,21 +54,6 @@ namespace Salon.Tests
             //Assert
             CollectionAssert.AreEqual(newList, result);
         }
-        // [TestMethod]
-        // public void Find_ReturnsCorrectCategory_Category()
-        // {
-        //   //Arrange
-        //   string name01 = "Work";
-        //   string name02 = "School";
-        //   Category newCategory1 = new Category(name01);
-        //   Category newCategory2 = new Category(name02);
-        //
-        //   //Act
-        //   Category result = Category.Find(2);
-        //
-        //   //Assert
-        //   Assert.AreEqual(newCategory2, result);
-        // }
         [TestMethod]
         public void GetItems_ReturnsEmptyItemList_ItemList()
         {
@@ -97,25 +69,6 @@ namespace Salon.Tests
             CollectionAssert.AreEqual(newList, result);
 
         }
-        // [TestMethod]
-        // public void AddItem_AssociatesItemWithCategory_ItemList()
-        // {
-        //   //Arrange
-        //   DateTime dd = new DateTime(2011, 6, 10);
-        //   int catId = 0;
-        //   string description = "Walk the dog.";
-        //   Item newItem = new Item(description, dd, catId);
-        //   List<Item> newList = new List<Item> { newItem };
-        //   string name = "Work";
-        //   Category newCategory = new Category(name);
-        //   newCategory.AddItem(newItem);
-        //
-        //   //Act
-        //   List<Item> result = newCategory.GetItems();
-        //
-        //   //Assert
-        //   CollectionAssert.AreEqual(newList, result);
-        // }
         [TestMethod]
         public void GetAll_CategoriesEmptyAtFirst_List()
         {
@@ -129,8 +82,8 @@ namespace Salon.Tests
         public void Equals_ReturnsTrueIfNamesAreTheSame_Category()
         {
             //Arrange, Act
-            Category firstCategory = new Category("Household chores");
-            Category secondCategory = new Category("Household chores");
+            Category firstCategory = new Category("Ben");
+            Category secondCategory = new Category("Ben");
 
             //Assert
             Assert.AreEqual(firstCategory, secondCategory);
@@ -140,7 +93,7 @@ namespace Salon.Tests
         public void Save_SavesCategoryToDatabase_CategoryList()
         {
             //Arrange
-            Category testCategory = new Category("Household chores");
+            Category testCategory = new Category("Ben");
             testCategory.Save();
 
             //Act
@@ -155,7 +108,7 @@ namespace Salon.Tests
         public void Save_DatabaseAssignsIdToCategory_Id()
         {
             //Arrange
-            Category testCategory = new Category("Household chores");
+            Category testCategory = new Category("Ben");
             testCategory.Save();
 
             //Act
@@ -172,7 +125,7 @@ namespace Salon.Tests
         public void Find_ReturnsCategoryInDatabase_Category()
         {
             //Arrange
-            Category testCategory = new Category("Household chores");
+            Category testCategory = new Category("Ben");
             testCategory.Save();
 
             //Act
@@ -182,22 +135,6 @@ namespace Salon.Tests
             Assert.AreEqual(testCategory, foundCategory);
         }
 
-        [TestMethod]
-        public void GetItems_RetrievesAllItemsWithCategory_ItemList()
-        {
-            //Arrange, Act
-            DateTime dd = new DateTime(2011, 6, 10);
-            Category testCategory = new Category("Household chores");
-            testCategory.Save();
-            Item firstItem = new Item("Mow the lawn", dd, testCategory.GetId());
-            firstItem.Save();
-            Item secondItem = new Item("Do the dishes", dd, testCategory.GetId());
-            secondItem.Save();
-            List<Item> testItemList = new List<Item> { firstItem, secondItem };
-            List<Item> resultItemList = testCategory.GetItems();
-
-            //Assert
-            CollectionAssert.AreEqual(testItemList, resultItemList);
-        }
+        
     }
 }

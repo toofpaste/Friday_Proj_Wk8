@@ -1,12 +1,20 @@
-<h3>Here is all of the information on employee: @Model["category"].GetName()</h3>
+<h3>Here is all of the clients for employee: @Model["category"].GetName()</h3>
 
 <ol>
+
+@if (Model["items"].Count == 0)
+{
+  <p>You have no clients for the stylist:  @Model["category"].GetName()</p>
+}
+@if(Model["items"].Count != 0)
+{
 @foreach (var item in @Model["items"])
 {
-  <li><a href='/categories/@Model["category"].GetId()/items/@item.GetId()'>@item.GetDescription()</a></li>
+  <li>Client Name: <a href='/categories/@Model["category"].GetId()/items/@item.GetId()'>@item.GetDescription()</a></li>
+}
 }
 </ol>
 
-<p><a href='/categories/@Model["category"].GetId()/items/new'>Add new information</a></p>
-<p><a href='/categories'>Return to stylist list</a></p>
+<p><a href='/categories/@Model["category"].GetId()/items/new'>Add new Client</a></p>
+<p><a href='/categories'>Return to Stylist list</a></p>
 <p><a href='/'>Return to Main Page</a></p>

@@ -45,10 +45,10 @@ namespace Salon.Controllers
         }
 
         [HttpPost("/categories/{categoryId}/items/{itemId}")]
-        public ActionResult Update(int categoryId, int itemId, string newDescription, DateTime newShiftDate)
+        public ActionResult Update(int categoryId, int itemId, string newDescription, DateTime newShiftDate, DateTime newEndShift, string newCutInfo)
         {
             Item item = Item.Find(itemId);
-            item.Edit(newDescription, newShiftDate);
+            item.Edit(newDescription, newShiftDate, newEndShift, newCutInfo);
             Dictionary<string, object> model = new Dictionary<string, object>();
             Category category = Category.Find(categoryId);
             model.Add("category", category);
