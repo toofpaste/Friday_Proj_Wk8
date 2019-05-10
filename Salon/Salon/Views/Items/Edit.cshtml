@@ -18,6 +18,10 @@
     <input id="newEndShift" name="newEndShift" type="datetime-local">
 	 <label for="newCutInfo">Haircut Type:</label>
 	 <input type="text" name="newCutInfo" value="@Model["item"].GetDescription()">
+	 <label for="newImgUrl">Image URL:</label>
+	 <input type="text" name="newImgUrl" value="@Model["item"].GetDescription()">
+	 <label for="newPrice">Price $</label>
+	 <input type="number" name="newPrice" value="@Model["item"].GetDescription()">
   <button type="submit">Edit</button>
 </form>
 <br><br><br>

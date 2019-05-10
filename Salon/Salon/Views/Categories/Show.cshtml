@@ -15,7 +15,8 @@
 {
 @foreach (var item in @Model["items"])
 {
-  <li>Client Name: <a href='/categories/@Model["category"].GetId()/items/@item.GetId()'>@item.GetDescription()</a></li>
+  <li><img src="@item.GetUrl()" alt="Could Not Find Image" height="50" width="50">Client Name: <a href='/categories/@Model["category"].GetId()/items/@item.GetId()'>@item.GetDescription()</a></li>
+  <br>
 }
 }
 </ol>

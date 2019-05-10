@@ -13,20 +13,26 @@ namespace Salon.Models
         private DateTime _endShift;
         private string _cutInfo;
         private string _imgUrl;
+        private int _price;
 
-        public Item(string description, DateTime shiftDate, int categoryId, DateTime endShift, string cutInfo, string imgUrl, int id = 0)
+        public Item(string description, DateTime shiftDate, int categoryId, DateTime endShift, string cutInfo, string imgUrl, int price, int id = 0)
         {
             _description = description;
             _shiftDate = shiftDate;
             _endShift = endShift;
             _cutInfo = cutInfo;
             _id = id;
+            _price = price;
             _imgUrl = imgUrl;
             _categoryId = categoryId;
         }
         public DateTime GetDate()
         {
             return _shiftDate;
+        }
+        public int GetPrice()
+        {
+            return _price;
         }
         public string GetUrl()
         {
@@ -81,7 +87,8 @@ namespace Salon.Models
                 DateTime endShift = rdr.GetDateTime(4);
                 string cutInfo = rdr.GetString(5);
                 string imgUrl = rdr.GetString(6);
-                Item newItem = new Item(itemDescription, shiftDate, itemCategoryId, endShift, cutInfo, imgUrl, itemId);
+                int price = rdr.GetInt32(7);
+                Item newItem = new Item(itemDescription, shiftDate, itemCategoryId, endShift, cutInfo, imgUrl, price, itemId);
                 allItems.Add(newItem);
             }
             conn.Close();
@@ -125,7 +132,8 @@ namespace Salon.Models
             DateTime endShiftA = rdr.GetDateTime(4);
             string cutInfoA = rdr.GetString(5);
             string imgUrl = rdr.GetString(6);
-            Item foundItem = new Item(itemDescription, shiftDate, catId, endShiftA, cutInfoA,imgUrl, itemId);
+            int price = rdr.GetInt32(7);
+            Item foundItem = new Item(itemDescription, shiftDate, catId, endShiftA, cutInfoA,imgUrl, price, itemId);
             conn.Close();
             if (conn != null)
             {
@@ -152,7 +160,7 @@ namespace Salon.Models
         }
 
 
-        public void Edit(string newDescription, DateTime newShiftDate, DateTime newEndShift, string newCutInfo, string newImgUrl)
+        public void Edit(string newDescription, DateTime newShiftDate, DateTime newEndShift, string newCutInfo, string newImgUrl, int newPrice)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
@@ -161,11 +169,13 @@ namespace Salon.Models
             var cmd3 = conn.CreateCommand() as MySqlCommand;
             var cmd4 = conn.CreateCommand() as MySqlCommand;
             var cmd5 = conn.CreateCommand() as MySqlCommand;
+            var cmd6 = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"UPDATE items SET description = @newDescription WHERE id = @searchId;";
             cmd2.CommandText = @"UPDATE items SET shiftDate = @newShiftDate WHERE id = @searchId;";
             cmd3.CommandText = @"UPDATE items SET endShift = @newEndShift WHERE id = @searchId;";
             cmd4.CommandText = @"UPDATE items SET cutInfo = @newCutInfo WHERE id = @searchId;";
             cmd5.CommandText = @"UPDATE items SET imgUrl = @newImgUrl WHERE id = @searchId;";
+            cmd6.CommandText = @"UPDATE items SET price = @newPrice WHERE id = @searchId;";
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";
             searchId.Value = _id;
@@ -204,11 +214,19 @@ namespace Salon.Models
             imgUrl.Value = this._imgUrl;
             cmd5.Parameters.Add(imgUrl);
 
+            _price = newPrice;
+            cmd6.Parameters.Add(searchId);
+            MySqlParameter price = new MySqlParameter();
+            price.ParameterName = "@newPrice";
+            price.Value = this._price;
+            cmd6.Parameters.Add(price);
+
             cmd.ExecuteNonQuery();
             cmd2.ExecuteNonQuery();
             cmd3.ExecuteNonQuery();
             cmd4.ExecuteNonQuery();
-            cmd4.ExecuteNonQuery();
+            cmd5.ExecuteNonQuery();
+            cmd6.ExecuteNonQuery();
             _description = newDescription;
             conn.Close();
             if (conn != null)
@@ -222,7 +240,7 @@ namespace Salon.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO items (description, shiftDate, category_id, endShift, cutInfo, imgUrl) VALUES (@ItemDescription,  @ItemShiftDate, @CategoryId, @ItemEndShift, @ItemCutInfo, @ItemImgUrl);";
+            cmd.CommandText = @"INSERT INTO items (description, shiftDate, category_id, endShift, cutInfo, imgUrl, price) VALUES (@ItemDescription,  @ItemShiftDate, @CategoryId, @ItemEndShift, @ItemCutInfo, @ItemImgUrl, @ItemPrice);";
             MySqlParameter description = new MySqlParameter();
             description.ParameterName = "@ItemDescription";
             description.Value = this._description;
@@ -231,22 +249,26 @@ namespace Salon.Models
             MySqlParameter endShift = new MySqlParameter();
             MySqlParameter cutInfo = new MySqlParameter();
             MySqlParameter imgUrl = new MySqlParameter();
+            MySqlParameter price = new MySqlParameter();
             category_id.ParameterName = "@CategoryId";
             shiftDate.ParameterName = "@ItemShiftDate";
             endShift.ParameterName = "@ItemEndShift";
             cutInfo.ParameterName = "@ItemCutInfo";
             imgUrl.ParameterName = "@ItemImgUrl";
+            price.ParameterName = "@ItemPrice";
             category_id.Value = this._categoryId;
             shiftDate.Value = this._shiftDate;
             endShift.Value = this._endShift;
             cutInfo.Value = this._cutInfo;
             imgUrl.Value = this._imgUrl;
+            price.Value = this._price;
             cmd.Parameters.Add(category_id);
             cmd.Parameters.Add(description);
             cmd.Parameters.Add(shiftDate);
             cmd.Parameters.Add(endShift);
             cmd.Parameters.Add(cutInfo);
             cmd.Parameters.Add(imgUrl);
+            cmd.Parameters.Add(price);
             cmd.ExecuteNonQuery();
             _id = (int)cmd.LastInsertedId;
             _categoryId = (int)cmd.LastInsertedId;

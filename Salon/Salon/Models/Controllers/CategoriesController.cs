@@ -42,11 +42,11 @@ namespace Salon.Controllers
         }
 
         [HttpPost("/categories/{categoryId}/items")]
-        public ActionResult Create(int categoryId, string itemDescription, DateTime shiftDate, DateTime endShift, string cutInfo, string imgUrl)
+        public ActionResult Create(int categoryId, string itemDescription, DateTime shiftDate, DateTime endShift, string cutInfo, string imgUrl, int price)
         {
             Dictionary<string, object> model = new Dictionary<string, object>();
             Category foundCategory = Category.Find(categoryId);
-            Item newItem = new Item(itemDescription, shiftDate, categoryId, endShift, cutInfo, imgUrl);
+            Item newItem = new Item(itemDescription, shiftDate, categoryId, endShift, cutInfo, imgUrl, price);
             newItem.Save();
             foundCategory.AddItem(newItem);
             List<Item> categoryItems = foundCategory.GetItems();
