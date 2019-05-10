@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <title>The Salon</title>
-  </head>
+@{
+  Layout = "_Layout";
+}
   <body>
+  <div class = "jumbotron">
     @* <h1>Salon Staff</h1>
-
+	</div>
+<div class = "container">
     <form action="/items" method="post">
     <label for="description">Add new information</label>
     <input id="description" name="description" type="text">
@@ -28,6 +27,6 @@
 
     <button type='submit'>Add Client</button>
   </form>
-
+  </div>
 </body>
 </html>

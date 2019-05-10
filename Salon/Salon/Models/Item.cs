@@ -12,19 +12,25 @@ namespace Salon.Models
         private int _categoryId;
         private DateTime _endShift;
         private string _cutInfo;
+        private string _imgUrl;
 
-        public Item(string description, DateTime shiftDate, int categoryId, DateTime endShift, string cutInfo, int id = 0)
+        public Item(string description, DateTime shiftDate, int categoryId, DateTime endShift, string cutInfo, string imgUrl, int id = 0)
         {
             _description = description;
             _shiftDate = shiftDate;
             _endShift = endShift;
             _cutInfo = cutInfo;
             _id = id;
+            -imgUrl = imgUrl;
             _categoryId = categoryId;
         }
         public DateTime GetDate()
         {
             return _shiftDate;
+        }
+        public string GetUrl()
+        {
+            reutnr _imgUrl;
         }
         public DateTime GetEnd()
         {

@@ -1,8 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+<div class = "jumbotron">
 <h1>Salon</h1>
 <hr>
 
 <h2>Edit Employee: @Model["category"].GetName()</h2>
-
+</div>
+<div class = "container">
 <form action="/categories/@Model["category"].GetId()/items/@Model["item"].GetId()" method="post">
   <label for="newDescription">Client Name:</label>
   <input type="text" name="newDescription" value="@Model["item"].GetDescription()">
@@ -15,5 +20,14 @@
 	 <input type="text" name="newCutInfo" value="@Model["item"].GetDescription()">
   <button type="submit">Edit</button>
 </form>
-
-<h4><a href="/categories/@Model["category"].GetId()/items/@Model["item"].GetId()">Return to previous page</a></h4>
+<br><br><br>
+</div>
+<div class = "footer">
+<div class = "row">
+<div class = "col-md-4"></div>
+<div class = "col-md-4">
+<h4><a class="btn btn-default btn-lg" role = "button" href="/categories/@Model["category"].GetId()/items/@Model["item"].GetId()">Return to previous page</a></h4>
+</div>
+<div class = "col-md-4"></div>
+</div>
+</div>

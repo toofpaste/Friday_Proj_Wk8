@@ -1,0 +1,27 @@
+.jumbotron {
+    text-align: center;
+    opacity: 0.9;
+    font-family: 'Sofia', cursive;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+}
+.container{
+    background-color: white;
+    opacity: 0.9;
+}
+.btn {
+    background-color: grey;
+    color: white;
+}
+body {
+    background-image: url("https://previews.123rf.com/images/terriana/terriana1304/terriana130400168/19335527-hair-background-hair-style-pattern-vector-illustration.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+}

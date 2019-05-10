@@ -1,5 +1,10 @@
+@{
+  Layout = "_Layout";
+}
+<div class = "jumbotron">
 <h3>Here is all of the clients for employee: @Model["category"].GetName()</h3>
-
+</div>
+<div class = "container">
 <ol>
 
 @if (Model["items"].Count == 0)
@@ -14,7 +19,18 @@
 }
 }
 </ol>
-
-<p><a href='/categories/@Model["category"].GetId()/items/new'>Add new Client</a></p>
-<p><a href='/categories'>Return to Stylist list</a></p>
-<p><a href='/'>Return to Main Page</a></p>
+<br><br><br>
+</div>
+<div class = "footer">
+<div class = "row">
+<div class = "col-md-4">
+<p><a class="btn btn-default btn-lg" role = "button" href='/categories/@Model["category"].GetId()/items/new'>Add new Client</a></p>
+</div>
+<div class = "col-md-4">
+<p><a class="btn btn-default btn-lg" role = "button" href='/categories'>Return to Stylist list</a></p>
+</div>
+<div class = "col-md-4">
+<p><a class="btn btn-default btn-lg" role = "button" href='/'>Return to Main Page</a></p>
+</div>
+</div>
+</div>
