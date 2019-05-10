@@ -21,7 +21,7 @@ namespace Salon.Models
             _endShift = endShift;
             _cutInfo = cutInfo;
             _id = id;
-            -imgUrl = imgUrl;
+            _imgUrl = imgUrl;
             _categoryId = categoryId;
         }
         public DateTime GetDate()
@@ -30,7 +30,7 @@ namespace Salon.Models
         }
         public string GetUrl()
         {
-            reutnr _imgUrl;
+            return _imgUrl;
         }
         public DateTime GetEnd()
         {
@@ -80,7 +80,8 @@ namespace Salon.Models
                 int itemCategoryId = rdr.GetInt32(3);
                 DateTime endShift = rdr.GetDateTime(4);
                 string cutInfo = rdr.GetString(5);
-                Item newItem = new Item(itemDescription, shiftDate, itemCategoryId, endShift, cutInfo, itemId);
+                string imgUrl = rdr.GetString(6);
+                Item newItem = new Item(itemDescription, shiftDate, itemCategoryId, endShift, cutInfo, imgUrl, itemId);
                 allItems.Add(newItem);
             }
             conn.Close();
@@ -123,7 +124,8 @@ namespace Salon.Models
             int catId = rdr.GetInt32(3);
             DateTime endShiftA = rdr.GetDateTime(4);
             string cutInfoA = rdr.GetString(5);
-            Item foundItem = new Item(itemDescription, shiftDate, catId, endShiftA, cutInfoA, itemId);
+            string imgUrl = rdr.GetString(6);
+            Item foundItem = new Item(itemDescription, shiftDate, catId, endShiftA, cutInfoA,imgUrl, itemId);
             conn.Close();
             if (conn != null)
             {
@@ -150,7 +152,7 @@ namespace Salon.Models
         }
 
 
-        public void Edit(string newDescription, DateTime newShiftDate, DateTime newEndShift, string newCutInfo)
+        public void Edit(string newDescription, DateTime newShiftDate, DateTime newEndShift, string newCutInfo, string newImgUrl)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
@@ -158,10 +160,12 @@ namespace Salon.Models
             var cmd2 = conn.CreateCommand() as MySqlCommand;
             var cmd3 = conn.CreateCommand() as MySqlCommand;
             var cmd4 = conn.CreateCommand() as MySqlCommand;
+            var cmd5 = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"UPDATE items SET description = @newDescription WHERE id = @searchId;";
             cmd2.CommandText = @"UPDATE items SET shiftDate = @newShiftDate WHERE id = @searchId;";
             cmd3.CommandText = @"UPDATE items SET endShift = @newEndShift WHERE id = @searchId;";
             cmd4.CommandText = @"UPDATE items SET cutInfo = @newCutInfo WHERE id = @searchId;";
+            cmd5.CommandText = @"UPDATE items SET imgUrl = @newImgUrl WHERE id = @searchId;";
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";
             searchId.Value = _id;
@@ -193,9 +197,17 @@ namespace Salon.Models
             cutInfo.Value = this._cutInfo;
             cmd4.Parameters.Add(cutInfo);
 
+            _imgUrl = newImgUrl;
+            cmd5.Parameters.Add(searchId);
+            MySqlParameter imgUrl = new MySqlParameter();
+            imgUrl.ParameterName = "@newImgUrl";
+            imgUrl.Value = this._imgUrl;
+            cmd5.Parameters.Add(imgUrl);
+
             cmd.ExecuteNonQuery();
             cmd2.ExecuteNonQuery();
             cmd3.ExecuteNonQuery();
+            cmd4.ExecuteNonQuery();
             cmd4.ExecuteNonQuery();
             _description = newDescription;
             conn.Close();
@@ -210,7 +222,7 @@ namespace Salon.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO items (description, shiftDate, category_id, endShift, cutInfo) VALUES (@ItemDescription,  @ItemShiftDate, @CategoryId, @ItemEndShift, @ItemCutInfo);";
+            cmd.CommandText = @"INSERT INTO items (description, shiftDate, category_id, endShift, cutInfo, imgUrl) VALUES (@ItemDescription,  @ItemShiftDate, @CategoryId, @ItemEndShift, @ItemCutInfo, @ItemImgUrl);";
             MySqlParameter description = new MySqlParameter();
             description.ParameterName = "@ItemDescription";
             description.Value = this._description;
@@ -218,19 +230,23 @@ namespace Salon.Models
             MySqlParameter category_id = new MySqlParameter();
             MySqlParameter endShift = new MySqlParameter();
             MySqlParameter cutInfo = new MySqlParameter();
+            MySqlParameter imgUrl = new MySqlParameter();
             category_id.ParameterName = "@CategoryId";
             shiftDate.ParameterName = "@ItemShiftDate";
             endShift.ParameterName = "@ItemEndShift";
             cutInfo.ParameterName = "@ItemCutInfo";
+            imgUrl.ParameterName = "@ItemImgUrl";
             category_id.Value = this._categoryId;
             shiftDate.Value = this._shiftDate;
             endShift.Value = this._endShift;
             cutInfo.Value = this._cutInfo;
+            imgUrl.Value = this._imgUrl;
             cmd.Parameters.Add(category_id);
             cmd.Parameters.Add(description);
             cmd.Parameters.Add(shiftDate);
             cmd.Parameters.Add(endShift);
             cmd.Parameters.Add(cutInfo);
+            cmd.Parameters.Add(imgUrl);
             cmd.ExecuteNonQuery();
             _id = (int)cmd.LastInsertedId;
             _categoryId = (int)cmd.LastInsertedId;

@@ -25,8 +25,9 @@ namespace Salon.Tests
         public void ItemConstructor_CreatesInstanceOfItem_Item()
         {
             DateTime dd = new DateTime(2011, 6, 10);
+            string testUrl = "https://i.imgur.com/BBcy6Wc.jpg";
             int catId = 0;
-            Item newItem = new Item("Bob", dd, catId, dd, "buzz");
+            Item newItem = new Item("Bob", dd, catId, dd, "buzz", testUrl);
             Assert.AreEqual(typeof(Item), newItem.GetType());
         }
 
@@ -34,9 +35,10 @@ namespace Salon.Tests
         public void GetDescription_ReturnsDescription_String()
         {
             int catId = 0;
+            string testUrl = "https://i.imgur.com/BBcy6Wc.jpg";
             DateTime dd = new DateTime(2011, 6, 10);
             string description = "John";
-            Item newItem = new Item(description, dd, catId, dd, "buzz");
+            Item newItem = new Item(description, dd, catId, dd, "buzz", testUrl);
             string result = newItem.GetDescription();
             Assert.AreEqual(description, result);
         }
@@ -45,9 +47,10 @@ namespace Salon.Tests
         public void SetDescription_SetDescription_String()
         {
             int catId = 0;
+             string testUrl = "https://i.imgur.com/BBcy6Wc.jpg";
             DateTime dd = new DateTime(2011, 6, 10);
             string description = "bob";
-            Item newItem = new Item(description, dd, catId, dd, "buzz");
+            Item newItem = new Item(description, dd, catId, dd, "buzz", testUrl);
 
             string updatedDescription = "john";
             newItem.SetDescription(updatedDescription);
@@ -70,8 +73,9 @@ namespace Salon.Tests
         {
             int catId = 0;
             DateTime dd = new DateTime(2011, 6, 10);
-            Item firstItem = new Item("Todd", dd, catId, dd, "buzz");
-            Item secondItem = new Item("Todd", dd, catId, dd, "buzz");
+             string testUrl = "https://i.imgur.com/BBcy6Wc.jpg";
+            Item firstItem = new Item("Todd", dd, catId, dd, "buzz", testUrl);
+            Item secondItem = new Item("Todd", dd, catId, dd, "buzz", testUrl);
             Assert.AreEqual(firstItem, secondItem);
         }
       

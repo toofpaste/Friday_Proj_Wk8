@@ -6,6 +6,7 @@
 </div>
 
 <div class = "container">
+<img src="@Model["item"].GetUrl()" alt="Could Not Find Image" height="150" width="150">
 <h2>Client: @Model["item"].GetDescription()</h2>
 <h3>Stylist: @Model["category"].GetName()</h3>
 <h3>Appointment Start: @Model["item"].GetDate()</h3>
@@ -13,18 +14,18 @@
 <h3>Haircut Type: @Model["item"].GetInfo()</h3>
 </div>
 <div class = "footer">
-<div class = "row">
-<div class = "col-md-3">
-<a class="btn btn-default btn-lg" role = "button" href='/categories/@Model["category"].GetId()/items/@Model["item"].GetId()/edit'>Edit this Info</a>
-</div>
-<div class = "col-md-3">
-<p><a class="btn btn-default btn-lg" role = "button" href='/categories/@Model["category"].GetId()/items/new'>Add New Client</a></p>
-</div>
-<div class = "col-md-3">
-<p><a class="btn btn-default btn-lg" role = "button" href='/categories'>Return to stylist list</a></p>
-</div>
-<div class = "col-md-3">
-<p><a class="btn btn-default btn-lg" role = "button" href='/'>Return to Main Page</a></p>
-</div>
-</div>
+	<div class = "row">
+		<div class = "col-md-3">
+			<a class="btn btn-default btn-lg" role = "button" href='/categories/@Model["category"].GetId()/items/@Model["item"].GetId()/edit'>Edit this Info</a>
+		</div>
+		<div class = "col-md-3">
+			<p><a class="btn btn-default btn-lg" role = "button" href='/categories/@Model["category"].GetId()/items/new'>Add New Client</a></p>
+		</div>
+		<div class = "col-md-3">
+			<p><a class="btn btn-default btn-lg" role = "button" href='/categories'>Return to stylist list</a></p>
+		</div>
+		<div class = "col-md-3">
+			<p><a class="btn btn-default btn-lg" role = "button" href='/'>Return to Main Page</a></p>
+		</div>
+	</div>
 </div>
