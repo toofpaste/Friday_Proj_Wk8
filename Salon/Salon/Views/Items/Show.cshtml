@@ -1,0 +1,10 @@
+<h1>Employee Details: </h1>
+
+<h2>@Model["item"].GetDescription()</h2>
+<h3>Category: @Model["category"].GetName()</h3>
+<h3>Shift Date: @Model["item"].GetDate()</h3>
+
+<a href='/categories/@Model["category"].GetId()/items/@Model["item"].GetId()/edit'>Edit this Info</a>
+<p><a href='/categories/@Model["category"].GetId()/items/new'>Add information</a></p>
+<p><a href='/categories'>Return to category list</a></p>
+<p><a href='/'>Return to Main Page</a></p>

@@ -1,0 +1,14 @@
+<h1>Salon</h1>
+<hr>
+
+<h2>Edit Employee: @Model["category"].GetName()</h2>
+
+<form action="/categories/@Model["category"].GetId()/items/@Model["item"].GetId()" method="post">
+  <label for="newDescription">Information:</label>
+  <input type="text" name="newDescription" value="@Model["item"].GetDescription()">
+  <label for="newShiftDate">Shift Date</label>
+    <input id="newShiftDate" name="newShiftDate" type="datetime-local">
+  <button type="submit">Edit</button>
+</form>
+
+<h4><a href="/categories/@Model["category"].GetId()/items/@Model["item"].GetId()">Return to previous page</a></h4>

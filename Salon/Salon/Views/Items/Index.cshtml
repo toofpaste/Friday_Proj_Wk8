@@ -1,0 +1,23 @@
+@using Salon.Models;
+
+<h1>Employee List</h1>
+<ul>
+
+@if (Model.Count == 0)
+{
+  <p>You have no information on this employee!</p>
+}
+@if(Model.Count != 0)
+{
+  @foreach (Item item in Model)
+  {
+    <li><a href='/items/@item.GetId()'>@item.GetDescription()</a></li>
+  }
+}
+
+</ul>
+<a  href="/items/new">Add new info.</a>
+
+<form action="/items/delete" method="post">
+  <button type="submit" name="button">Clear All Employees</button>
+</form>

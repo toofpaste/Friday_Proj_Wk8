@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>The Salon</title>
+  </head>
+  <body>
+    @* <h1>Salon Staff</h1>
+
+    <form action="/items" method="post">
+    <label for="description">Add new information</label>
+    <input id="description" name="description" type="text">
+    <button type="submit">Submit</button>
+  </form> *@
+  <h1>Add a new item to @Model.GetName()</h1>
+
+  <form action='/categories/@Model.GetId()/items' method='post'>
+    <input id='categoryId' name='categoryId' type='hidden' value='@Model.GetId()'>
+    <label for='itemDescription'>Stylist Info</label>
+    <input id='itemDescription' name='itemDescription' type='text'>
+    <label for="shiftDate">Shift Date</label>
+    <input id="shiftDate" name="shiftDate" type="datetime-local">
+    <button type='submit'>Add Info</button>
+  </form>
+
+</body>
+</html>
