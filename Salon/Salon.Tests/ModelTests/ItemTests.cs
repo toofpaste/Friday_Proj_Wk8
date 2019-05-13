@@ -18,7 +18,7 @@ namespace Salon.Tests
 
         public ItemTest()
         {
-            DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=salon_test;";
+            DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=michael_larragueta_test;";
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace Salon.Tests
             CollectionAssert.AreEqual(newList, result);
         }
 
-      
+
         [TestMethod]
         public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Item()
         {
@@ -82,7 +82,7 @@ namespace Salon.Tests
             Item secondItem = new Item("Todd", dd, catId, dd, "buzz", testUrl, price);
             Assert.AreEqual(firstItem, secondItem);
         }
-      
+
 
     }
 }
