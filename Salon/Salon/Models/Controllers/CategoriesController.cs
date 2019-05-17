@@ -56,6 +56,27 @@ namespace Salon.Controllers
             model.Add("category", foundCategory);
             return View("Show", model);
         }
+        [HttpGet("/categories/{categoryId}/edit")]
+        public ActionResult Edit(int categoryId)
+        {
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Category category = Category.Find(categoryId);
+            model.Add("category", category);
+            return View(model);
+        }
+         [HttpPost("/categories/{categoryId}")]
+        public ActionResult Update(int categoryId, string newName)
+        {
+            Category category = Category.Find(categoryId);
+            category.Edit(newName);
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            List<Item> categoryItems = category.GetItems();
+            List<Item> allItems = Item.GetAll();
+            model.Add("allItems", allItems);
+            model.Add("items", categoryItems);
+            model.Add("category", category);
+            return View("Show", model);
+        }
 
     }
 }

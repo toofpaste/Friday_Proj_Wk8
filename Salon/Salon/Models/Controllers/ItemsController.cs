@@ -62,16 +62,23 @@ namespace Salon.Controllers
             return View(model);
         }
 
-        [HttpPost("/items/delete")]
-        public ActionResult Delete()
+        [HttpPost("/items/{itemId}")]
+        public ActionResult Delete(int itemId)
         {
-            Item.ClearAll();
-            return View();
+            Console.WriteLine("FUCK");
+            Item item = Item.Find(itemId);
+            item.Delete();
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            model.Add("item", item);
+            return View("Show", model);
         }
-        [HttpGet("/items/delete")]
-        public ActionResult DeleteAll()
+        [HttpGet("/items/{itemId}/delete")]
+        public ActionResult DeleteOne(int itemId)
         {
-            return View();
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Item item = Item.Find(itemId);
+            model.Add("item", item);
+            return View(model);
         }
 
         [HttpGet("/categories/{categoryId}/items/{itemId}/edit")]
