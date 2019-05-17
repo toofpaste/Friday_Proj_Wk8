@@ -30,6 +30,42 @@ namespace Salon.Controllers
             return View("Index", allCategories);
         }
 
+        [HttpPost("/category/{categoryId}")]
+        public ActionResult Delete(int categoryId)
+        {
+            Category item = Category.Find(categoryId);
+            item.Delete();
+            Category newCategory = new Category("dummy", "dummy");
+            List<Category> allCategories = Category.GetAll();
+            return View("Index", allCategories);
+        }
+        [HttpGet("/categories/{categoryId}/delete")]
+        public ActionResult DeleteOne(int categoryId)
+        {
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Category item = Category.Find(categoryId);
+            model.Add("category", item);
+            return View(model);
+        }
+
+         [HttpPost("/categories/deleteAll")]
+        public ActionResult DeleteA(int itemId)
+        { 
+            Category.ClearAll();
+            Category newCategory = new Category("dummy", "dummy");
+            List<Category> allCategories = Category.GetAll();
+            return View("Index", allCategories);
+        }
+        [HttpGet("/categories/deleteAll/delete")]
+        public ActionResult DeleteAll(int itemId)
+        {
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Item item = Item.Find(itemId);
+            model.Add("item", item);
+            return View(model);
+        }
+
+
         [HttpGet("/categories/{id}")]
         public ActionResult Show(int id)
         {
