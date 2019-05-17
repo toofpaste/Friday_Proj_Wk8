@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 13, 2019 at 04:11 PM
--- Server version: 5.6.38
--- PHP Version: 7.2.1
+-- Generation Time: May 17, 2019 at 11:23 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -30,8 +32,48 @@ USE `michael_larragueta_test`;
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `cutInfo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `cutInfo`) VALUES
+(66, 'Home stuff', 'test'),
+(67, 'Home stuff', 'test'),
+(68, 'Home stuff', 'test'),
+(69, 'Work stuff', 'test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories_items`
+--
+
+CREATE TABLE `categories_items` (
+  `id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `categories_items`
+--
+
+INSERT INTO `categories_items` (`id`, `item_id`, `category_id`) VALUES
+(18, 32, 34),
+(20, 34, 39),
+(21, 35, 40),
+(23, 37, 46),
+(24, 38, 47),
+(26, 41, 53),
+(27, 42, 54),
+(29, 46, 60),
+(30, 47, 61),
+(32, 52, 67),
+(33, 53, 68);
 
 -- --------------------------------------------------------
 
@@ -61,6 +103,12 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `categories_items`
+--
+ALTER TABLE `categories_items`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
@@ -74,13 +122,20 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
+--
+-- AUTO_INCREMENT for table `categories_items`
+--
+ALTER TABLE `categories_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
