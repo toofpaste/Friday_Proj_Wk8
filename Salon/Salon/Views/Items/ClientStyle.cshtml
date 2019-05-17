@@ -1,0 +1,36 @@
+@{
+  Layout = "_Layout";
+}
+<div class = "jumbotron">
+<h1>Client Details: </h1>
+</div>
+
+<div class = "container">
+@{bool isFalse = true;
+<h1>Clients With The Cut Type of: @Model["category"].GetInfo() </h1>
+@foreach(var client in @Model["allClient"])
+ {
+		@if(Model["category"].GetInfo() == client.GetInfo())
+		{
+			isFalse = false;
+			<h3>Client: <a href='/categories/@Model["category"].GetId()/items/@client.GetId()'>@client.GetDescription()</a></h3>
+		}
+}
+@if(isFalse){
+<h3>There are no current clients wanting that hairstyle</h3>
+}
+}
+</div>
+
+<div class = "footer">
+	<div class = "row">
+		<div class = "col-md-3">
+			<p><a class="btn btn-default btn-lg" role = "button" href='/categories'>Return to stylist list</a></p>
+		</div>
+		<div class = "col-md-3"></div>
+		<div class = "col-md-3"></div>
+		<div class = "col-md-3">
+			<p><a class="btn btn-default btn-lg" role = "button" href='/'>Return to Main Page</a></p>
+		</div>
+	</div>
+</div>

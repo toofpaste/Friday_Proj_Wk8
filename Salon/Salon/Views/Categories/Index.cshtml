@@ -15,6 +15,7 @@
 @foreach (var category in Model)
 {
   <h3>Stylist: <a href='/categories/@category.GetId()'>@category.GetName()</a></h3>
+  <p>Specialty: <a class="btn btn-default btn-lg" role = "button" href='/categories/@category.GetId()/items/clients/info'> @category.GetInfo()</a></p>
 }
 </div>
 <br><br><br>

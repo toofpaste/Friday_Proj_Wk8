@@ -6,17 +6,15 @@
 </div>
 
 <div class = "container">
-<h1>Stylists With The Cut Specialty of: @Model["item"].GetInfo() </h1>
-@foreach(var category in @Model["itemCat"])
-{
-	@foreach(var item in @Model["item"])
-	{
-		@if(item.GetInfo() == category.GetInfo())
-		{
-			<p>@category.GetName()</p>
-		}
-	}
-}
+<h1>Information about client @Model["item"].GetDescription()</h1>
+<img src="@Model["item"].GetUrl()" alt="Could Not Find Image" height="150" width="150">
+<h2>Name: @Model["item"].GetDescription()</h2>
+<h2>Styist: @Model["category"].GetName()</h2>
+<h3>Appointment Start: @Model["item"].GetDate()</h3>
+<h3>Appointment End: @Model["item"].GetEnd()</h3>
+<h3>Haircut Type: <a class="btn btn-default btn-lg" role = "button" href='/categories/@Model["category"].GetId()/items/@Model["item"].GetId()/info'> @Model["item"].GetInfo()</a></h3>
+<h3>Price $@Model["item"].GetPrice()</h3>
+
 </div>
 <div class = "footer">
 	<div class = "row">

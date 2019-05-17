@@ -16,7 +16,22 @@ namespace Salon.Controllers
         }
 
         [HttpGet("/categories/{categoryId}/items/{itemId}")]
-        public ActionResult Show(int itemId)
+        public ActionResult Show(int categoryId, int itemId)
+        {
+            Item item = Item.Find(itemId);
+            Dictionary<string, object> model = new Dictionary<string, object>();
+           // List<Category> ItemCat = item.GetCategories();
+            //List<Category> allCat = Category.GetAll();
+           // model.Add("item", item);
+            //model.Add("ItemCat", ItemCat);
+            //model.Add("allCat", allCat);
+            Category category = Category.Find(categoryId);
+            model.Add("item", item);
+            model.Add("category", category);
+            return View(model);
+        }
+        [HttpGet("/categories/{categoryId}/items/{itemId}/info")]
+        public ActionResult StyleMatch(int categoryId, int itemId)
         {
             Item item = Item.Find(itemId);
             Dictionary<string, object> model = new Dictionary<string, object>();
@@ -25,9 +40,25 @@ namespace Salon.Controllers
             model.Add("item", item);
             model.Add("ItemCat", ItemCat);
             model.Add("allCat", allCat);
-           // Category category = Category.Find(categoryId);
-            //model.Add("item", item);
-            //model.Add("category", category);
+            Category category = Category.Find(categoryId);
+            model.Add("category", category);
+            return View(model);
+        }
+        [HttpGet("/categories/{categoryId}/items/clients/info")]
+        public ActionResult ClientStyle(int categoryId, int itemId)
+        {
+            Item item = Item.Find(itemId);
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            List<Category> ItemCat = item.GetCategories();
+            List<Category> allCat = Category.GetAll();
+          
+            List<Item> allClient = Item.GetAll();
+            model.Add("allClient", allClient);
+            model.Add("item", item);
+            model.Add("ItemCat", ItemCat);
+            model.Add("allCat", allCat);
+            Category category = Category.Find(categoryId);
+            model.Add("category", category);
             return View(model);
         }
 

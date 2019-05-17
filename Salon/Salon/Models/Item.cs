@@ -124,15 +124,25 @@ namespace Salon.Models
             thisId.Value = id;
             cmd.Parameters.Add(thisId);
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
-            rdr.Read();
-            int itemId = rdr.GetInt32(0);
-            string itemDescription = rdr.GetString(1);
-            DateTime shiftDate = rdr.GetDateTime(2);
-            int catId = rdr.GetInt32(3);
-            DateTime endShiftA = rdr.GetDateTime(4);
-            string cutInfoA = rdr.GetString(5);
-            string imgUrl = rdr.GetString(6);
-            int price = rdr.GetInt32(7);
+            int itemId = 0;
+            string itemDescription = "";
+            DateTime shiftDate = new DateTime(2011, 6, 10);
+            int catId = 0;
+            DateTime endShiftA = new DateTime(2011, 6, 10);
+            string cutInfoA = "";
+            string imgUrl = "";
+            int price = 0;
+            while(rdr.Read())
+               {
+                itemId = rdr.GetInt32(0);
+                itemDescription = rdr.GetString(1);
+                shiftDate = rdr.GetDateTime(2);
+                catId = rdr.GetInt32(3);
+                endShiftA = rdr.GetDateTime(4);
+                cutInfoA = rdr.GetString(5);
+                imgUrl = rdr.GetString(6);
+                price = rdr.GetInt32(7);
+                }
             Item foundItem = new Item(itemDescription, shiftDate, catId, endShiftA, cutInfoA,imgUrl, price, itemId);
             conn.Close();
             if (conn != null)
