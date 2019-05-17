@@ -21,6 +21,7 @@ namespace Salon.Tests
             DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=michael_larragueta_test;";
         }
 
+
         [TestMethod]
         public void ItemConstructor_CreatesInstanceOfItem_Item()
         {
