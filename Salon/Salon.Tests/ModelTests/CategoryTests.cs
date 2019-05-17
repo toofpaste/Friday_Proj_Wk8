@@ -16,7 +16,7 @@ namespace Salon.Tests
         }
         public CategoryTest()
         {
-            DBConfiguration.ConnectionString = @"server=localhost;user id=root;password=root;port=8889;database=salon_test;";
+            DBConfiguration.ConnectionString = @"server=localhost;user id=root;password=root;port=8889;database=michael_larragueta_test;";
         }
         [TestMethod]
         public void CategoryConstructor_CreatesInstanceOfCategory_Category()
@@ -135,6 +135,6 @@ namespace Salon.Tests
             Assert.AreEqual(testCategory, foundCategory);
         }
 
-        
+
     }
 }
