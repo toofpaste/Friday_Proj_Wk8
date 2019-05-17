@@ -65,15 +65,32 @@ namespace Salon.Controllers
         [HttpPost("/items/{itemId}")]
         public ActionResult Delete(int itemId)
         {
-            Console.WriteLine("FUCK");
             Item item = Item.Find(itemId);
             item.Delete();
-            Dictionary<string, object> model = new Dictionary<string, object>();
-            model.Add("item", item);
-            return View("Show", model);
+            Category newCategory = new Category("dummy", "dummy");
+            List<Category> allCategories = Category.GetAll();
+            return View("Index", allCategories);
         }
         [HttpGet("/items/{itemId}/delete")]
         public ActionResult DeleteOne(int itemId)
+        {
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Item item = Item.Find(itemId);
+            model.Add("item", item);
+            return View(model);
+        }
+
+        
+        [HttpPost("/items/deleteAll")]
+        public ActionResult DeleteA(int itemId)
+        { 
+            Item.ClearAll();
+            Category newCategory = new Category("dummy", "dummy");
+            List<Category> allCategories = Category.GetAll();
+            return View("Index", allCategories);
+        }
+        [HttpGet("/items/deleteAll/delete")]
+        public ActionResult DeleteAll(int itemId)
         {
             Dictionary<string, object> model = new Dictionary<string, object>();
             Item item = Item.Find(itemId);

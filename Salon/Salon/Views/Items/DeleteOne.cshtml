@@ -1,5 +1,8 @@
 @{
   Layout = "_Layout";
 }
+
+<form action="/items/@Model["item"].GetId()" method="post">
 <h1>Your list has been cleared!</h1>
-<p><a href='/'>Back to home.</a></p>
+<button type ="submit">Deleted</button>
+</form>
