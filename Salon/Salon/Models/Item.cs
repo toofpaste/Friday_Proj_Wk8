@@ -315,7 +315,8 @@ namespace Salon.Models
             {
                 int catId = rdr.GetInt32(0);
                 string catName = rdr.GetString(1);
-                Category foundCat = new Category(catName, catId);
+                string cutInfo = rdr.GetString(2);
+                Category foundCat = new Category(catName, cutInfo, catId);
                 categories.Add(foundCat);
             }
             conn.Close();

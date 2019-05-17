@@ -22,9 +22,9 @@ namespace Salon.Controllers
         }
 
         [HttpPost("/categories")]
-        public ActionResult Create(string categoryName)
+        public ActionResult Create(string categoryName, string cutInfo)
         {
-            Category newCategory = new Category(categoryName);
+            Category newCategory = new Category(categoryName, cutInfo);
             newCategory.Save();
             List<Category> allCategories = Category.GetAll();
             return View("Index", allCategories);

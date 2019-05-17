@@ -8,12 +8,14 @@ namespace Salon.Models
     {
         private static List<Category> _instances = new List<Category> { };
         private string _name;
+        private string _cutInfo;
         private int _id;
         private List<Item> _items;
 
-        public Category(string categoryName, int id = 0)
+        public Category(string categoryName, string cutInfo, int id = 0)
         {
             _name = categoryName;
+            _cutInfo = cutInfo;
             _id = id;
             _items = new List<Item> { };
         }
@@ -26,6 +28,10 @@ namespace Salon.Models
         public string GetName()
         {
             return _name;
+        }
+        public string GetInfo()
+        {
+            return _cutInfo;
         }
 
         public int GetId()
@@ -59,7 +65,8 @@ namespace Salon.Models
             {
                 int CategoryId = rdr.GetInt32(0);
                 string CategoryName = rdr.GetString(1);
-                Category newCategory = new Category(CategoryName, CategoryId);
+                string cutInfo = rdr.GetString(2);
+                Category newCategory = new Category(CategoryName, cutInfo, CategoryId);
                 allCategories.Add(newCategory);
             }
             conn.Close();
@@ -83,12 +90,14 @@ namespace Salon.Models
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
             int CategoryId = 0;
             string CategoryName = "";
+            string cutInfo = "";
             while (rdr.Read())
             {
                 CategoryId = rdr.GetInt32(0);
                 CategoryName = rdr.GetString(1);
+                cutInfo = rdr.GetString(2);
             }
-            Category newCategory = new Category(CategoryName, CategoryId);
+            Category newCategory = new Category(CategoryName, cutInfo,  CategoryId);
             conn.Close();
             if (conn != null)
             {
@@ -175,14 +184,21 @@ namespace Salon.Models
 
         public void Save()
         {
+            //Console.WriteLine(_cutInfo);
+            //Console.WriteLine(this._cutInfo);
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO categories (name) VALUES (@name);";
+            cmd.CommandText = @"INSERT INTO categories (name, cutInfo) VALUES (@name, @cutInfo);";
             MySqlParameter name = new MySqlParameter();
+            MySqlParameter cutInfo = new MySqlParameter();
             name.ParameterName = "@name";
+            cutInfo.ParameterName = "@cutInfo";
             name.Value = this._name;
+            cutInfo.Value = this._cutInfo;
+            //Console.WriteLine(cutInfo.Value);
             cmd.Parameters.Add(name);
+            cmd.Parameters.Add(cutInfo);
             cmd.ExecuteNonQuery();
             _id = (int)cmd.LastInsertedId;
             conn.Close();

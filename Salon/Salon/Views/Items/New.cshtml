@@ -16,18 +16,21 @@
   <form action='/categories/@Model.GetId()/items' method='post'>
     <input id='categoryId' name='categoryId' type='hidden' value='@Model.GetId()'>
     <label for='itemDescription'>Client Name</label>
-    <input id='itemDescription' name='itemDescription' type='text'>
+    <input id='itemDescription' name='itemDescription' type='text'><br>
     <label for="shiftDate">Appointment Start: </label>
     <input id="shiftDate" name="shiftDate" type="datetime-local">
 	<br>
 	 <label for="endShift">Appointment End: </label>
-    <input id="endShift" name="endShift" type="datetime-local">
-	<label for='cutInfo'>Haircut Type</label>
-    <input id='cutInfo' name='cutInfo' type='text'>
+    <input id="endShift" name="endShift" type="datetime-local"><br>
+	<p>Select Specialty</p><br>
+	<input type="checkbox" name="cutInfo" for="cutInfo" value="Bowl"> Bowl Cut<br>
+	<input type="checkbox" name="cutInfo" for="cutInfo" value="Buzz"> Buzz Cut<br>
+	<input type="checkbox" name="cutInfo" for="cutInfo" value="Braid" checked> Hair Braiding<br>
+	<input type="checkbox" name="cutInfo" for="cutInfo" value="Braid" checked> Hair Braiding<br>
 	<label for='imgUrl'>Image of client</label>
-    <input id='imgUrl' name='imgUrl' type='text'>
+    <input id='imgUrl' name='imgUrl' type='text'><br>
 	<label for='price'>Price $</label>
-    <input id='price' name='price' type='number'>
+    <input id='price' name='price' type='number'><br>
 
     <button type='submit'>Add Client</button>
   </form>
