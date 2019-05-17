@@ -21,7 +21,7 @@ namespace Salon.Tests
         [TestMethod]
         public void CategoryConstructor_CreatesInstanceOfCategory_Category()
         {
-            Category newCategory = new Category("test category");
+            Category newCategory = new Category("test category", "test");
             Assert.AreEqual(typeof(Category), newCategory.GetType());
         }
         [TestMethod]
@@ -29,7 +29,7 @@ namespace Salon.Tests
         {
             //Arrange
             string name = "Test Category";
-            Category newCategory = new Category(name);
+            Category newCategory = new Category(name, "test");
 
             //Act
             string result = newCategory.GetName();
@@ -42,9 +42,9 @@ namespace Salon.Tests
             //Arrange
             string name01 = "Work";
             string name02 = "School";
-            Category newCategory1 = new Category(name01);
+            Category newCategory1 = new Category(name01,"test");
             newCategory1.Save();
-            Category newCategory2 = new Category(name02);
+            Category newCategory2 = new Category(name02, "test");
             newCategory2.Save();
             List<Category> newList = new List<Category> { newCategory1, newCategory2 };
 
@@ -59,7 +59,7 @@ namespace Salon.Tests
         {
             //Arrange
             string name = "Work";
-            Category newCategory = new Category(name);
+            Category newCategory = new Category(name, "test");
             List<Item> newList = new List<Item> { };
 
             //Act
@@ -82,8 +82,8 @@ namespace Salon.Tests
         public void Equals_ReturnsTrueIfNamesAreTheSame_Category()
         {
             //Arrange, Act
-            Category firstCategory = new Category("Ben");
-            Category secondCategory = new Category("Ben");
+            Category firstCategory = new Category("Ben", "test");
+            Category secondCategory = new Category("Ben", "test");
 
             //Assert
             Assert.AreEqual(firstCategory, secondCategory);
@@ -93,7 +93,7 @@ namespace Salon.Tests
         public void Save_SavesCategoryToDatabase_CategoryList()
         {
             //Arrange
-            Category testCategory = new Category("Ben");
+            Category testCategory = new Category("Ben", "test");
             testCategory.Save();
 
             //Act
@@ -108,7 +108,7 @@ namespace Salon.Tests
         public void Save_DatabaseAssignsIdToCategory_Id()
         {
             //Arrange
-            Category testCategory = new Category("Ben");
+            Category testCategory = new Category("Ben", "test");
             testCategory.Save();
 
             //Act
@@ -125,7 +125,7 @@ namespace Salon.Tests
         public void Find_ReturnsCategoryInDatabase_Category()
         {
             //Arrange
-            Category testCategory = new Category("Ben");
+            Category testCategory = new Category("Ben", "test");
             testCategory.Save();
 
             //Act
@@ -134,6 +134,9 @@ namespace Salon.Tests
             //Assert
             Assert.AreEqual(testCategory, foundCategory);
         }
+
+
+
 
 
     }
