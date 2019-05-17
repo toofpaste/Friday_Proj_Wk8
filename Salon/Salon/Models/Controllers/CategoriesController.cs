@@ -36,6 +36,8 @@ namespace Salon.Controllers
             Dictionary<string, object> model = new Dictionary<string, object>();
             Category selectedCategory = Category.Find(id);
             List<Item> categoryItems = selectedCategory.GetItems();
+            List<Item> allItems = Item.GetAll();
+            model.Add("allItems", allItems);
             model.Add("category", selectedCategory);
             model.Add("items", categoryItems);
             return View(model);

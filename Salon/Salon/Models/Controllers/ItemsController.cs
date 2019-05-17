@@ -20,9 +20,14 @@ namespace Salon.Controllers
         {
             Item item = Item.Find(itemId);
             Dictionary<string, object> model = new Dictionary<string, object>();
-            Category category = Category.Find(categoryId);
+            List<Category> ItemCat = item.GetCategories();
+            List<Category> allCat = Category.GetAll();
             model.Add("item", item);
-            model.Add("category", category);
+            model.Add("ItemCat", ItemCat);
+            model.Add("allCat", allCat);
+           // Category category = Category.Find(categoryId);
+            //model.Add("item", item);
+            //model.Add("category", category);
             return View(model);
         }
 

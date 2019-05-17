@@ -279,6 +279,75 @@ namespace Salon.Models
             }
         }
 
+         public void Delete()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM items WHERE id = @item_id; DELETE FROM categories_items WHERE item_id = @item_id;";
+            MySqlParameter itemId = new MySqlParameter();
+            itemId.ParameterName = "@item_id";
+            itemId.Value = this.GetId();
+            cmd.Parameters.Add(itemId);
+            cmd.ExecuteNonQuery();
+            if (conn != null)
+            {
+              conn.Close();
+            }
+        }
+
+          public List<Category> GetCategories()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT categories.* FROM items
+                JOIN categories_items ON (items.id = categories_items.item_id)
+                JOIN categories ON (categories_items.category_id = categories.id)
+                WHERE items.id = @item_id;";
+            MySqlParameter itemId = new MySqlParameter();
+            itemId.ParameterName = "@item_id";
+            itemId.Value = _id;
+            cmd.Parameters.Add(itemId);
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+            List<Category> categories = new List<Category> {};
+            while(rdr.Read())
+            {
+                int catId = rdr.GetInt32(0);
+                string catName = rdr.GetString(1);
+                Category foundCat = new Category(catName, catId);
+                categories.Add(foundCat);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return categories;
+        }
+          public void AddCategory(Category newCategory)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO categories_items (category_id, item_id) VALUES (@category_id, @item_id);";
+            MySqlParameter category_id = new MySqlParameter();
+            category_id.ParameterName = "@category_id";
+            category_id.Value = newCategory.GetId();
+            cmd.Parameters.Add(category_id);
+            MySqlParameter item_id = new MySqlParameter();
+            item_id.ParameterName = "@item_id";
+            item_id.Value = _id;
+            cmd.Parameters.Add(item_id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+
 
     }
 }
