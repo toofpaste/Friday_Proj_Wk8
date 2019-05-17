@@ -24,6 +24,7 @@ namespace Salon.Tests
         [TestMethod]
         public void ItemConstructor_CreatesInstanceOfItem_Item()
         {
+
             DateTime dd = new DateTime(2011, 6, 10);
             int price = 50;
             string testUrl = "https://i.imgur.com/BBcy6Wc.jpg";
