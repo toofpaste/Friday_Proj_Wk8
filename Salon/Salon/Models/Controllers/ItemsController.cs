@@ -63,9 +63,14 @@ namespace Salon.Controllers
         }
 
         [HttpPost("/items/delete")]
-        public ActionResult DeleteAll()
+        public ActionResult Delete()
         {
             Item.ClearAll();
+            return View();
+        }
+        [HttpGet("/items/delete")]
+        public ActionResult DeleteAll()
+        {
             return View();
         }
 

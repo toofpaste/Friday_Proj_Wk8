@@ -104,13 +104,13 @@ namespace Salon.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM items;";
+            cmd.CommandText = @"DELETE FROM `items`;";
             cmd.ExecuteNonQuery();
             conn.Close();
             if (conn != null)
             {
-                conn.Dispose();
-            }
+            conn.Dispose();
+      }
         }
 
         public static Item Find(int id)
